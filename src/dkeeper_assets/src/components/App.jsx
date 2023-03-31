@@ -20,19 +20,25 @@ function App() {
   useEffect(() => {
     console.log("use effect triggered");
     fetchData();
-  },[]);
+  }, []);
 
-  // from within the use Effect 
+  // from within the use Effect
   async function fetchData() {
     // goes into main.mo file and taps into the read notes stored file
     // it will wait for all the notes to arrive
     const notesArray = await dkeeper.readNotes();
 
-    // adds the array of notes retreived from the canister to the 
+    // adds the array of notes retreived from the canister to the
     setNotes(notesArray);
   }
 
+
+
   function deleteNote(id) {
+
+    // goesinto the canister and deletes the node with id
+    dkeeper.removeNote(id);
+
     setNotes((prevNotes) => {
       return prevNotes.filter((noteItem, index) => {
         return index !== id;
