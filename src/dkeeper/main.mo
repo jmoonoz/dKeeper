@@ -30,9 +30,12 @@ actor Dkeeper {
     notes := List.push(newNote, notes);
 
     Debug.print(debug_show(notes));
+  };
+    // this funtion will help retreive data from a canister
+    public query func readNotes(): async [Note]{
+      // convert the lis to an array and pass it back
+      return List.toArray(notes);
+    };
 
-
-
-  }
 
 };
